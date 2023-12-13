@@ -42,8 +42,8 @@
 </head>
 <body>
     <div class="welcome-container">
-        <div class="welcome-heading">Welcome to Your Blog</div>
-        <div class="welcome-subheading">Discover and share amazing stories</div>
+        <div class="welcome-heading">Köszönt téged a POST_R!</div>
+        <div class="welcome-subheading">Oszd meg élményeidet másokkal!</div>
 
         @if (Route::has('login'))
             <div class="login-links">

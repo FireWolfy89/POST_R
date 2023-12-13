@@ -41,12 +41,34 @@
             margin-bottom: 10px;
         }
 
+        .post-content {
+            margin-bottom: 10px;
+        }
+
         .post-info {
             font-size: 0.8rem;
             color: #555;
         }
+        
+        .like-form {
+            margin-top: 10px;
+        }
+
+        .like-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
         nav {
-            
             display: flex;
             justify-content: center;
             margin-top: 10px;
@@ -64,6 +86,7 @@
         nav a:hover {
             background-color: #ccc;
         }
+        
         header {
             position: fixed;
             top: 0;
@@ -77,13 +100,13 @@
     </style>
 </head>
 <body>
-<header>
-    <h1><i>POST_R</i></h1>
-            <nav>
-                <a href="{{ route('posts.create') }}">Posztolás</a>
-                <a href="{{ auth()->check() && auth()->user()->isAdmin() ? route('admin.dashboard') : route('user.dashboard') }}">Dashboard</a>
-            </nav>
-        </header>
+    <header>
+        <h1><i>POST_R</i></h1>
+        <nav>
+            <a href="{{ route('posts.create') }}">Posztolás</a>
+            <a href="{{ auth()->check() && auth()->user()->isAdmin() ? route('admin.dashboard') : route('user.dashboard') }}">Dashboard</a>
+        </nav>
+    </header>
     <div class="container">
         <h2>{{ __('Posztok') }}</h2>
 
@@ -95,6 +118,9 @@
                     {{ __('Beküldés dátuma') }}: {{ $post->created_at }} | 
                     {{ __('Felhasználó') }}: {{ $post->user->name }}
                 </div>
+                <div>
+                <a href="{{ route('posts.show', ['post' => $post->id]) }}" target="_blank">Részletek</a>
+            </div>
             </div>
         @empty
             <p>{{ __('Nincsenek Posztok') }}</p>

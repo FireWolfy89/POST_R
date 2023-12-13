@@ -21,6 +21,8 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            width: 100%;
         }
 
         h1 {
@@ -44,6 +46,12 @@
             font-size: 16px;
         }
 
+        textarea {
+            
+            min-height: 250px;
+            resize: vertical; 
+        }
+
         button {
             background-color: black;
             color: #fff;
@@ -52,6 +60,7 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
+            
         }
     </style>
 </head>

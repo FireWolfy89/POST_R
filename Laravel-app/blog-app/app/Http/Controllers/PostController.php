@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use App\Models\Post;
 
@@ -9,7 +10,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::all(); // Összes blogposzt lekérése
+        $posts = Post::all(); // Összes poszt lekérése
 
         return view('posts.index', compact('posts'));
     }
@@ -17,6 +18,11 @@ class PostController extends Controller
     public function create()
     {
         return view('post.create');
+    }
+
+    public function show(Post $post)
+    {
+    return view('posts.show', compact('post'));
     }
 
     public function store(Request $request)
