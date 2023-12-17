@@ -56,7 +56,12 @@ Route::middleware(['auth','role:user'])->group(function(){
 });
 
 
+//Routing a userek listázására
 
-
+Route::middleware(['admin'])->group(function () {
+    Route::get('/users', [UserController::class, 'index'])->name('user.listuser');
+    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+    Route::post('/users/{user}', [UserController::class, 'update'])->name('users.update');
+});
 
 

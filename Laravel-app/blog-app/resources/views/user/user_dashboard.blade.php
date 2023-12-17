@@ -70,7 +70,9 @@
 
         <main>
             <section>
-               
+               <!-- Időjárásjelentés -->
+               <h2>Időjárás</h2>
+                <div id="weather"></div>
                
             </section>
         </main>
@@ -79,7 +81,31 @@
             <p>&copy; {{ date('Y') }} Mate Debreczeni's project</p>
         </footer>
     </div>
+         <!-- OpenWeatherMap időjárás API CALL -->
+    <script>
 
+        const weatherApiKey ='9ceb67e07932edbf285bc2fb2b4ccc4f';
+
+        //Hőmérséklet konvertálása
+        function convertTemp(kelvin){
+            const celsius = kelvin - 273.15;
+            return {celsius};
+        }
+
+        //Időjárás lekérdezése
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=Budapest&appid=${weatherApiKey}`)
+        .then(response => response.json())
+        .then(data => {
+            const temperatures = convertTemp(data.main.temp);
+            const weatherDiv = document.getElementById('weather');
+            weatherDiv.innerHTML = `
+                    <p>Hőmérséklet: ${temperatures.celsius.toFixed(2)} °C</p>
+                    <p>Időjárás: ${data.weather[0].description}</p>
+                    <p>Város: ${data.name}</p>
+                    `;
+        });
+
+    </script>
     
 </body>
 </html>
