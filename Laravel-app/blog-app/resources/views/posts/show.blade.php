@@ -60,6 +60,18 @@
             color: #333;
         }
 
+        .comment {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #eee;
+            border-radius: 5px;
+        }
+
+        .comment p {
+            margin: 0;
+            font-size: 16px;
+        }
+
         .comment-form {
             margin-top: 20px;
         }
@@ -95,11 +107,27 @@
             background-color: #45a049;
         }
 
-        .comment {
-            margin-bottom: 10px;
-            padding: 10px;
-            background-color: #eee;
-            border-radius: 5px;
+        .delete-button {
+            color: white;
+            background-color: #e74c3c;
+        }
+
+        .delete-button:hover {
+            background-color: #c0392b;
+        }
+
+        .comment-delete{
+            background-color: red;
+            color: white;
+            padding: 2px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .comment-delete:hover{
+            background-color: #c0392b;
         }
     </style>
 </head>
@@ -120,6 +148,15 @@
             @forelse ($post->comments as $comment)
                 <div class="comment">
                     <p><strong>{{ $comment->user->name }}:</strong> {{ $comment->content }}</p>
+                    <div>
+                    @if (auth()->check() && auth()->user()->isAdmin())
+                        <form method="POST" action="{{ route('comments.destroy', ['comment' => $comment]) }}" style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="comment-delete">Törlés</button>
+                        </form>
+                        @endif
+                    </div>
                 </div>
             @empty
                 <p>Nincsenek kommentek.</p>

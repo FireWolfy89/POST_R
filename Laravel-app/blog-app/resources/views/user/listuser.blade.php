@@ -36,6 +36,7 @@
         .action-buttons {
             display: flex;
             gap: 5px;
+           
         }
 
         .action-buttons button {
@@ -52,10 +53,34 @@
             background-color: #5bc0de;
             color: #fff;
         }
+        .dashboard{
+            padding: 8px;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        nav a {
+            color: #333;
+            text-decoration: none;
+            padding: 10px;
+            margin: 0 10px;
+            background-color: black;
+            color: white;
+            border-radius: 5px;
+        }
+
+       
     </style>
 </head>
 <body>
     <h2>Felhasználók Listája</h2>
+    <header>
+        <nav>
+            <a href="{{ auth()->check() && auth()->user()->isAdmin() ? route('admin.dashboard') : route('user.dashboard') }}">Vissza a Dashboardra</a>
+        </nav>
+    </header>
     
     <table>
         <thead>
@@ -89,5 +114,9 @@
             @endforeach
         </tbody>
     </table>
+
+    <a href="{{ route('export.users') }}" class="export-button">
+    <button type="button">Export Users</button>
+</a>
 </body>
 </html>

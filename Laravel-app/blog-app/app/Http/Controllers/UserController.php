@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use League\Csv\Reader;
+use League\Csv\Writer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+
 
 
 class UserController extends Controller
@@ -39,4 +43,22 @@ class UserController extends Controller
         return view('user.user_dashboard');
     }
 
+    //User export
+
+    public function export(){
+         $users = User::all();
+
+        $csv = Writer::createFromString('');
+        $csv->insertOne(['Name', 'Email', 'Status']);
+
+        foreach ($users as $user) {
+            $csv->insertOne([$user->name, $user->email, $user->status]);
+        }
+
+       return $csv->output('users.csv');
+    }
+
+
 }
+
+

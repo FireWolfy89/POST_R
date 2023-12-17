@@ -47,6 +47,7 @@
         main {
             flex-grow: 1;
             padding: 20px;
+            text-align: center;
         }
 
         footer {
@@ -55,6 +56,12 @@
             padding: 10px;
             text-align: center;
         }
+
+        #weather {
+            text-align: center;
+            font-size: 20px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -62,7 +69,7 @@
         <header>
             <h1>Üdv a POST_R-en!</h1>
             <nav>
-            <a href="{{ route('posts.index') }}">Posztok listázása</a>
+                <a href="{{ route('posts.index') }}">Posztok listázása</a>
                 <a href="{{ route('posts.create') }}">Posztolás</a>
                 <a href="{{ route('dashboard') }}">Profil</a>
             </nav>
@@ -73,7 +80,6 @@
                <!-- Időjárásjelentés -->
                <h2>Időjárás</h2>
                 <div id="weather"></div>
-               
             </section>
         </main>
 
@@ -81,7 +87,8 @@
             <p>&copy; {{ date('Y') }} Mate Debreczeni's project</p>
         </footer>
     </div>
-         <!-- OpenWeatherMap időjárás API CALL -->
+
+    <!-- OpenWeatherMap időjárás API CALL -->
     <script>
 
         const weatherApiKey ='9ceb67e07932edbf285bc2fb2b4ccc4f';
@@ -99,13 +106,12 @@
             const temperatures = convertTemp(data.main.temp);
             const weatherDiv = document.getElementById('weather');
             weatherDiv.innerHTML = `
-                    <p>Hőmérséklet: ${temperatures.celsius.toFixed(2)} °C</p>
+                    <p>Hőmérséklet: ${temperatures.celsius.toFixed()} °C</p>
                     <p>Időjárás: ${data.weather[0].description}</p>
                     <p>Város: ${data.name}</p>
                     `;
         });
 
     </script>
-    
 </body>
 </html>

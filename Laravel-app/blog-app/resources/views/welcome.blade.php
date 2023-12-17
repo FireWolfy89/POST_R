@@ -20,8 +20,8 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: #f8f9fa; /* Set your background color */
-            color: #495057; /* Set your text color */
+            background-color: #f8f9fa; 
+            color: #495057; 
         }
 
         .welcome-heading {
@@ -48,7 +48,9 @@
         @if (Route::has('login'))
             <div class="login-links">
                 @auth
-                    <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700">Dashboard</a>
+                   
+                <a href="{{ auth()->check() && auth()->user()->isAdmin() ? route('admin.dashboard') : route('user.dashboard') }}">Dashboard</a>
+
                 @else
                     <a href="{{ route('login') }}" class="text-sm text-gray-700">Log in</a>
                     @if (Route::has('register'))

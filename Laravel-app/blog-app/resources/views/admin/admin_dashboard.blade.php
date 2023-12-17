@@ -47,6 +47,7 @@
         main {
             flex-grow: 1;
             padding: 20px;
+            text-align: center;
         }
 
         footer {
@@ -54,6 +55,12 @@
             color: #fff;
             padding: 10px;
             text-align: center;
+        }
+
+        #weather {
+            text-align: center;
+            font-size: 20px;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -101,7 +108,7 @@
             const temperatures = convertTemp(data.main.temp);
             const weatherDiv = document.getElementById('weather');
             weatherDiv.innerHTML = `
-                    <p>Hőmérséklet: ${temperatures.celsius.toFixed(2)} °C</p>
+                    <p>Hőmérséklet: ${temperatures.celsius.toFixed()} °C</p>
                     <p>Időjárás: ${data.weather[0].description}</p>
                     <p>Város: ${data.name}</p>
                     `;

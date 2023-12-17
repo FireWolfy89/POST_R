@@ -20,6 +20,7 @@
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             margin-top: 20px;
+           
         }
 
         h2 {
@@ -54,8 +55,8 @@
             margin-top: 10px;
         }
 
-        .like-button {
-            background-color: #4CAF50;
+        .delete-button {
+            background-color: red;
             color: white;
             border: none;
             padding: 8px 16px;
@@ -66,6 +67,21 @@
             margin: 4px 2px;
             cursor: pointer;
             border-radius: 4px;
+        }
+
+        .details-button{
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            background-color: #3498db;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .details-button:hover{
+            background-color: #2980b9;
         }
 
         nav {
@@ -97,6 +113,18 @@
             text-align: center;
             z-index: 1000;
         }
+
+        .no-posts-message {
+        font-size: 1.2rem;
+        text-align: center;
+        color: #555;
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 200px; 
+    }
+
     </style>
 </head>
 <body>
@@ -119,11 +147,18 @@
                     {{ __('Felhasználó') }}: {{ $post->user->name }}
                 </div>
                 <div>
-                <a href="{{ route('posts.show', ['post' => $post->id]) }}" target="_blank">Részletek</a>
+                <a href="{{ route('posts.show', ['post' => $post->id]) }}" ><button class="details-button">Részletek</button></a>
+                @if (auth()->check() && auth()->user()->isAdmin())
+                <form method="POST" action="{{ route('posts.destroy', ['post' => $post->id]) }}" style="display: inline;">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="delete-button">Törlés</button>
+            </form>
+            @endif
             </div>
             </div>
         @empty
-            <p>{{ __('Nincsenek Posztok') }}</p>
+        <p class="no-posts-message">{{ __('Nincsenek Posztok') }}</p>
         @endforelse
     </div>
 </body>
