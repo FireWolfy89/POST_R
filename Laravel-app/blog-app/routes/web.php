@@ -37,7 +37,7 @@ require __DIR__.'/auth.php';
     return view('welcome');
 }); 
 
-//Routing az admin és a user dashboardokra + Middleware
+//Routing az admin és a user dashboardokra
 
 Route::middleware(['auth','role:admin'])->group(function(){
     Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
@@ -65,14 +65,13 @@ Route::middleware(['checkUserStatus'])->group(function () {
 });
 
 
-//Admin funkciók a userek listázására
+//Admin funkciók
 
 Route::middleware(['admin'])->group(function () {
     Route::get('/users', [UserController::class, 'index'])->name('user.listuser');
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
     Route::post('/users/{user}', [UserController::class, 'update'])->name('users.update');
     Route::get('/export-users', [UserController::class, 'export'])->name('export.users');
-    Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
     Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
     Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 });

@@ -57,18 +57,5 @@ class PostController extends Controller
         return redirect()->route('posts.index')->with('success', 'A poszt sikeresen törölve!');
     }
 
-    public function update(Request $request, Post $post){
-
-        $request->validate([
-            'title' => 'required',
-            'content' => 'required',
-        ]);
-
-        $post->update([
-            'title'=> $request->title,
-            'content' => $request->content,
-        ]);
-
-        return redirect()->route('posts.index')->with('success', 'A poszt sikeresen frissítve!');
-    }
+    
 }
